@@ -11,7 +11,7 @@ struct Nodo{
 void insertar(Nodo *&, int);
 void mostrarPila(Nodo *, int);
 void mover(Nodo *&, Nodo *&);
-void Hanoi (int, Nodo *& ,Nodo *& , Nodo *& );
+void Hanoi (int, Nodo *& ,Nodo *& , Nodo *& , int);
 
 Nodo *Origen = NULL;
 Nodo *Aux = NULL;
@@ -28,12 +28,8 @@ int main() {
     mostrarPila(Aux, num);
     mostrarPila(Destino, num);
 
-    cout << "_____________________________________________" << endl;
-    Hanoi(num, Origen, Aux, Destino);
 
-    mostrarPila(Origen, num);
-    mostrarPila(Aux, num);
-    mostrarPila(Destino, num);
+    Hanoi(num, Origen, Aux, Destino, num);
 
     return 0;
 }
@@ -76,10 +72,14 @@ void mover (Nodo *& Salida, Nodo *& Entrada){
 
 }
 
-void Hanoi(int n, Nodo *&Origen, Nodo *&Aux, Nodo *&Destino) {
+void Hanoi(int n, Nodo *&Origen, Nodo *&Aux, Nodo *&Destino, int num) {
     if (n > 0) {
-        Hanoi(n - 1, Origen, Destino, Aux);
+        Hanoi(n - 1, Origen, Destino, Aux, num);
         mover(Origen, Destino);
-        Hanoi(n - 1, Aux, Origen, Destino);
+        cout << "________________________________________" << endl;
+        mostrarPila(Origen, num);
+        mostrarPila(Aux, num);
+        mostrarPila(Destino, num);
+        Hanoi(n - 1, Aux, Origen, Destino, num);
     }
 }
